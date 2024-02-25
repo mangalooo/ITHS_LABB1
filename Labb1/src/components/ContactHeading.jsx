@@ -4,7 +4,7 @@ function ContactHeading() {
     const SetContactHeading = () => {
         return (
             <>
-                <h1 className="text-center"> Kontakter </h1>
+                <h1 className="text-center"> Kontakt </h1>
                 <br />
                 <br />
             </>
