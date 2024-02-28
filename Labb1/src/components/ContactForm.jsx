@@ -2,20 +2,17 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ContactForm() {
 
-  const [list, setList] = useState(['']);
+  const [list, setList] = useState([{ name: 'Test Testsson', email: 'test@test.nu', mobile: '0000-000000'}]);
 
-  const [firstname, setFirstname] = useState(['']);
-  const [lastname, setLastname] = useState(['']);
-  const [email, setEmail] = useState(['']);
-  const [address, setAddress] = useState(['']);
-  const [mobile, setMobile] = useState(['']);
-  const [city, setCity] = useState(['']);
-  const [postcode, setPostCode] = useState(['']);
-
+  const [formFirstname, setFirstname] = useState('');
+  const [formLastname, setLastname] = useState('');
+  const [formEmail, setEmail] = useState('');
+  const [formMobile, setMobile] = useState('');
+  
   const handleFirstname = (event) => {
     setFirstname(event.target.value);
   }
@@ -28,79 +25,109 @@ function ContactForm() {
     setEmail(event.target.value);
   }
 
-  const handleAddress = (event) => {
-    setAddress(event.target.value);
-  }
-
   const handleMobile = (event) => {
     setMobile(event.target.value);
   }
 
-  const handleCity = (event) => {
-    setCity(event.target.value);
+  const AddContactList = () => {
+
+  // useEffect(() => {
+  //   // The code that we want to run
+  //   console.log('The count is:', list);
+
+  //   // Optional return function
+  //   return () => {
+  //     console.log('I am being cleaned up!');
+  //   };
+  // }, [list]); // The dependency array
+
+
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    // The code that we want to run
+    console.log('The count is:', count);
+
+    // Optional return function
+    return () => {
+      console.log('I am being cleaned up!');
+    };
+  }, [count]); // The dependency array
+
+    const test = Array.isArray(list);
+
+    console.log('Är de en Array? ' + test);
+
+    return (
+      <div className='tutorial'>
+        <h1>Count: {count}</h1>
+        <button onClick={() => setCount(count - 1)}>
+          Decrement
+        </button>
+        <button onClick={() => setCount(count + 1)}>
+          Increment
+        </button>
+      </div>
+    );
   }
 
-  const handlePostCode = (event) => {
-    setPostCode(event.target.value);
-  }
-
-  const addList = () => {
-
-    const newList = list.concat(firstname, lastname, email, address, mobile, city, postcode);
-    setList(newList);
-  }
+  const removeItem = (index) => {
+    const removeData = [...list];
+    removeData.splice(index, 1);
+    setList(removeData);
+}
 
   return (
+    <>
     <Form>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formFirstname">
-          <Form.Label>Förnamn</Form.Label>
-          <Form.Control value={firstname} onChange={handleFirstname} />
+          <Form.Label> Förnamn </Form.Label>
+          <Form.Control type="text" value={formFirstname} onChange={handleFirstname} />
         </Form.Group>
 
         <Form.Group as={Col} controlId="formLastname">
-          <Form.Label>Efternamn</Form.Label>
-          <Form.Control value={lastname} onChange={handleLastname} />
+          <Form.Label> Efternamn </Form.Label>
+          <Form.Control type="text" value={formLastname} onChange={handleLastname} />
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formMobile">
+          <Form.Label> Mobil </Form.Label>
+          <Form.Control type="text" value={formMobile} onChange={handleMobile} />
         </Form.Group>
       </Row>
 
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formEmail">
-          <Form.Label>E-post</Form.Label>
-          <Form.Control type="email" value={email} onChange={handleEmail} />
-        </Form.Group>
-      </Row>
-
-      <Form.Group className="mb-3" controlId="formAddress">
-        <Form.Label>Adress</Form.Label>
-        <Form.Control value={address} onChange={handleAddress} />
-      </Form.Group>
-
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formMobile">
-          <Form.Label>Mobil</Form.Label>
-          <Form.Control value={mobile} onChange={handleMobile} />
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formCity">
-          <Form.Label>Stad</Form.Label>
-          <Form.Control value={city} onChange={handleCity} />
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formPostCode">
-          <Form.Label>Postnummer</Form.Label>
-          <Form.Control value={postcode} onChange={handlePostCode} />
+          <Form.Label> E-post </Form.Label>
+          <Form.Control type="email" value={formEmail} onChange={handleEmail} />
         </Form.Group>
       </Row>
 
       <div className="text-center">
-        <Button variant="outline-success" type="submit" onSubmit={addList(firstname, lastname, email, address, mobile, city, postcode)}> 
-          Submit
-        </Button>
+        <Button variant="outline-success" type="submit" onClick={AddContactList}> Spara </Button>
       </div>
     </Form>
+
+    <br />
+    <br />
+    <h1 className="text-center"> Kontakt lista </h1>
+    <br/>
+    <div>
+      <ul className="text-center">
+        {Array.isArray(list)
+        ? list.map((item, index) => (
+          <il key={index}> 
+            <b><span className="text-success">{item.name}</span> {item.email} <span className="text-success">{item.mobile}</span> </b>
+            <Button variant="outline-danger" size="sm" onClick={() => removeItem(index)}> Ta bort kontakt </Button> 
+            {<br />} 
+            {<br />} 
+          </il>
+        )) : null }
+      </ul>
+      </div>
+    </>
   );
 }
 
 export default ContactForm;
-
