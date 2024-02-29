@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function ContactForm() {
 
@@ -29,46 +29,10 @@ function ContactForm() {
     setMobile(event.target.value);
   }
 
-  const AddContactList = () => {
-
-  // useEffect(() => {
-  //   // The code that we want to run
-  //   console.log('The count is:', list);
-
-  //   // Optional return function
-  //   return () => {
-  //     console.log('I am being cleaned up!');
-  //   };
-  // }, [list]); // The dependency array
-
-
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    // The code that we want to run
-    console.log('The count is:', count);
-
-    // Optional return function
-    return () => {
-      console.log('I am being cleaned up!');
-    };
-  }, [count]); // The dependency array
-
-    const test = Array.isArray(list);
-
-    console.log('Är de en Array? ' + test);
-
-    return (
-      <div className='tutorial'>
-        <h1>Count: {count}</h1>
-        <button onClick={() => setCount(count - 1)}>
-          Decrement
-        </button>
-        <button onClick={() => setCount(count + 1)}>
-          Increment
-        </button>
-      </div>
-    );
+  const AddContactList = (event) => {
+    event.preventDefault()
+    const newData = [...list, { name: formFirstname + ' ' + formLastname, email: formEmail, mobile: formMobile }];
+    setList(newData);
   }
 
   const removeItem = (index) => {

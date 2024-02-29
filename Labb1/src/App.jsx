@@ -1,7 +1,7 @@
 import './App.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-//import ContactProject from './components/ContactProject';
-import Test from './components/Test';
+import ContactProject from './components/ContactProject';
+//import Test from './components/Test';
 
 function App() {
 
@@ -9,8 +9,8 @@ function App() {
     <>
       <div>
 
-      {/* <ContactProject /> */}
-      <Test />
+      <ContactProject />
+      {/* <Test /> */}
 
 
       </div>
