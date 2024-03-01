@@ -1,28 +1,15 @@
-import './App.css'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from "react";
-import ContactProject from './components/ContactProject';
-//import Test from './components/Test';
+import Contacts from "./components/Contacts";
 
 function App() {
-
   // Set page title
   useEffect(() => {
-    document.title = 'Kontakter'
-});
+    document.title = "Kontakter";
+  });
 
-  return (
-    <>
-      <div>
-
-      <ContactProject />
-      {/* <Test /> */}
-
-
-      </div>
-
-    </>
-  )
+  return <Contacts />;
 }
 
-export default App
+export default App;

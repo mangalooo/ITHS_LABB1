@@ -1,22 +1,15 @@
-
 function ContactHeading() {
-
-    const SetContactHeading = () => {
-        return (
-            <>
-                <h1 className="text-center"> Kontakt </h1>
-                <br />
-                <br />
-            </>
-        )
-
-    }
-
+  const SetContactHeading = () => {
     return (
-        <>
-            {SetContactHeading()}
-        </>
-    )
-  }
+      <>
+        <h1 className="text-center"> Kontakt </h1>
+        <br />
+        <br />
+      </>
+    );
+  };
 
-  export default ContactHeading
+  return <>{SetContactHeading()}</>;
+}
+
+export default ContactHeading;
