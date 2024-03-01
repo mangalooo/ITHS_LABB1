@@ -9,7 +9,7 @@ function ContactForm() {
     { name: "Test Testsson", email: "test@test.nu", mobile: "0000-000000" },
   ]);
 
-  const countContacts = useRef(1);
+  const contactCounter = useRef(1);
   const [formFirstname, setFirstname] = useState("");
   const [formLastname, setLastname] = useState("");
   const [formEmail, setEmail] = useState("");
@@ -42,15 +42,15 @@ function ContactForm() {
       },
     ];
     setList(newData);
-
-    countContacts.current++;
-    alert("Kontakter i listan: " + countContacts.current); // 6
+    contactCounter.current++;
+    alert("Kontakter i listan: " + contactCounter.current); 
   };
 
   const removeItem = (index, addList) => {
     const removeData = [...addList];
     removeData.splice(index, 1);
     setList(removeData);
+    contactCounter.current--;
   };
 
   return (
